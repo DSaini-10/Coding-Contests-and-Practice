@@ -19,13 +19,13 @@ public:
         }
         int till =count/2;
         cout<<count<<"  "<<till;
-        count=0;
+        count=1;
         temp=head;
         while(temp){
-            count++;
             if(count==till){
                 head=temp->next;
             }
+            count++;
             temp=temp->next;
         }
         return head;
