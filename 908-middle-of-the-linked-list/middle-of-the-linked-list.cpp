@@ -24,7 +24,6 @@ public:
         while(temp){
             if(count==till){
                 head=temp->next;
-                break;
             }
             count++;
             temp=temp->next;
