@@ -25,13 +25,11 @@ public:
     }
     
     int top() {
-        int x=(*(--vp.end())).first;
-        return x;
+        return (*(--vp.end())).first;
     }
     
     int getMin() {
-        int y=(*(--vp.end())).second;
-        return y;
+        return (*(--vp.end())).second;
         
     }
 };
