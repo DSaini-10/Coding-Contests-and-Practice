@@ -1,37 +1,56 @@
-#include<bits/stdc++.h>
-using namespace std;
 class MinStack {
 public:
-    vector<pair <int,int>> vp;
-    MinStack() {
-    }
-    
+    vector<long> arr;
+    long mini = INT_MAX;
+    MinStack() {}
+
     void push(int val) {
-        if(vp.size()==0){
-            vp.emplace_back(make_pair(val,val));
+        if (arr.size() == 0) {
+            arr.emplace_back(val);
+            this->mini = val;
         }
-        else{
-            if((*(--vp.end())).second > val){
-                vp.emplace_back(make_pair(val,val));
-            }
-            else{
-                vp.emplace_back(make_pair(val,(*(--vp.end())).second));
-            }
+        else if (val >= (this->getMin())) {
+            arr.emplace_back(val);
+        } 
+        else {
+            long modi = (long)2 * val - (this->getMin());
+            this->mini = val;
+            // cout<<modi;
+            arr.emplace_back(modi);
         }
-    }
-    
-    void pop() {
-        vp.erase(vp.end());
-    }
-    
-    int top() {
-        return (*(--vp.end())).first;
-    }
-    
-    int getMin() {
-        return (*(--vp.end())).second;
         
+        // for(auto t:arr){cout<<t<<" ";}
+        // cout<<endl;
     }
+
+    void pop() {
+        auto it = arr.end();
+        long x = *(--it);
+
+
+        if (x < (this->getMin())) {
+            mini = 2 * mini - (*it);
+            // cout<<mini;
+            arr.erase(it);
+        } else {
+            arr.erase(it);
+        }
+
+        if(arr.size()==0){
+            this->mini =INT_MAX;
+        }
+    }
+
+    int top() {
+        auto it = arr.end();
+        it--;
+        if ((*it) > this->getMin()) {
+            return *it;
+        }
+        return this->getMin();
+    }
+
+    int getMin() { return mini; }
 };
 
 /**
